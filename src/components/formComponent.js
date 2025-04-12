@@ -16,6 +16,7 @@ const FormComponent = ()=>{
     }
 
     const saveItem =(event)=>{
+        event.preventDefault()
         const itemData = {
             title:title,
             amount:Number(amount)
@@ -30,16 +31,16 @@ const FormComponent = ()=>{
     return(
         <div>
             <form onSubmit={saveItem}>
-                <div>
+                <div className="form-control">
                     <label>ชื่อรายการ</label>
                     <input type="text" placeholder="ระบุชื่อรายการของคุณ" onChange={inputTitle} value={title} />
                 </div>
-                <div>
+                <div className="form-control">
                     <label>จำนวนเงิน</label>
                     <input type="number" placeholder="ระบุจำนวนเงิน" onChange={inputAmout} value={amount} />
                 </div>
                 <div>
-                    <button type="submit">เพิ่มข้อมูล</button>
+                    <button type="submit" className="btn">เพิ่มข้อมูล</button>
                 </div>
             </form>
         </div>

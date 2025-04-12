@@ -1,6 +1,6 @@
-import { element } from "prop-types";
 import Item from "./item";
 
+import '../styles/transaction.css'
 import { v4 as uuidv4 } from 'uuid';
 
 const Transaction = ()=>{
@@ -8,7 +8,7 @@ const Transaction = ()=>{
         {title:"ค่ารักษาพยาบาล",amount:2000}
     ]
     return (
-        <ul>
+        <ul className="item-list">
             {data.map((element) =>{
                 return <Item {...element} key={uuidv4()} />
             })}
