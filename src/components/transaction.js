@@ -1,16 +1,15 @@
 import Item from "./item";
 
 import '../styles/transaction.css'
-import { v4 as uuidv4 } from 'uuid';
 
-const Transaction = ()=>{
-    const data = [
-        {title:"ค่ารักษาพยาบาล",amount:2000}
-    ]
+const Transaction = (props)=>{
+
+    const {items} = props
+
     return (
         <ul className="item-list">
-            {data.map((element) =>{
-                return <Item {...element} key={uuidv4()} />
+            {items.map((element) =>{
+                return <Item {...element} key={element.id} />
             })}
         </ul>
     )
