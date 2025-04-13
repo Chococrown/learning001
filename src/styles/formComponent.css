@@ -2,6 +2,7 @@ label{
     display: inline-block;
     margin: 10px 0;
 }
+
 input{
     border: 1px solid #dedede;
     border-radius: 2px;
@@ -13,6 +14,7 @@ input{
 input:focus{
     outline: none;
 }
+
 .btn{
     background-color: purple;
     color: #fff;
@@ -22,4 +24,13 @@ input:focus{
     padding: 10px;
     font-size: 16px;
     width: 100%;
+}
+
+.form-control{
+    background-color: blanchedalmond;
+}
+
+label{
+    font-size: larger;
+    font-weight: 400;
 }

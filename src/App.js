@@ -1,7 +1,10 @@
+import { element } from 'prop-types';
 import './App.css';
 
 import FormComponent from './components/formComponent';
 import Transaction from './components/transaction';
+import ReportComponent from './components/reportComponent';
+import DataContext from './components/dataContext';
 
 import { useState,useEffect } from 'react';
 
@@ -20,15 +23,35 @@ function App() {
 
   useEffect(() =>{
     const amounts = items.map(items=>items.amount)
-  },[items])
+    const income = amounts.filter(element=>element>0).reduce((total,element)=>total+=element,0)
+    const expense = (amounts.filter(element=>element<0).reduce((total,element)=>total+=element,0))*-1
+    
+    console.log("รายได้ = ",income)
+    console.log("รายจ่าย = ",expense)
+
+    setReportIncome(income)
+    setReportExpense(expense)
+  },[items,reportIncome,reportExpense])
 
   return (
-    <div className="App">
-      <h1>สวัสดี React</h1>
-      <FormComponent onAddItem = {onAddNewItem} />
-      <Transaction items = {items} />
-      
-    </div>
+      <DataContext.Provider value={
+        {
+          income: reportIncome,
+          expense: reportExpense
+        }
+      }>
+
+        <div className="App">
+
+          <h1 className='header'>รายรับ - รายจ่าย</h1>
+          <ReportComponent />
+          <FormComponent onAddItem = {onAddNewItem} />
+          <Transaction items = {items} />
+        
+        </div>
+
+      </DataContext.Provider>
+
   );
 }
 
