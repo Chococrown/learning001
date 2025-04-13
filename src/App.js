@@ -3,11 +3,14 @@ import './App.css';
 import FormComponent from './components/formComponent';
 import Transaction from './components/transaction';
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 function App() {
 
   const [items,setItems] = useState([])
+
+  const [reportIncome,setReportIncome] = useState(0)
+  const [reportExpense,setReportExpense] = useState(0)
 
   const onAddNewItem = (newItem) =>{
     setItems((prevItem) =>{
@@ -15,7 +18,9 @@ function App() {
     })
   }
 
-
+  useEffect(() =>{
+    const amounts = items.map(items=>items.amount)
+  },[items])
 
   return (
     <div className="App">

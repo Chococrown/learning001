@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 
 import '../styles/formComponent.css'
 
@@ -6,15 +6,17 @@ import { v4 as uuidv4 } from 'uuid';
 
 const FormComponent = (props)=>{
 
-    const [title,setTiltle] = useState('')
-    const [amount,setAmount] = useState(0)
+    const [title,setTitle] = useState('')
+    const [amount,setAmount] = useState('')
+    const [formValid,setFormValid] = useState(false)
+    const checkData = title.trim().length>0 && amount!==0
 
     const inputTitle = (event)=>{
-        setTiltle(event.target.value)
+        setTitle(event.target.value)
     }
 
-    const inputAmout = (event)=>{
-        setAmount(event.target.value)
+    const inputAmount = (event)=>{
+        setAmount(+event.target.value)
     }
 
     const saveItem =(event)=>{
@@ -27,9 +29,16 @@ const FormComponent = (props)=>{
         
         props.onAddItem(itemData)
 
-        setTiltle('')
-        setAmount(0)
+        setTitle('')
+        setAmount('')
+        setFormValid(false)
     }
+
+    useEffect(()=>{
+        if(checkData){
+            setFormValid(checkData)
+        }
+    },[title,amount])
 
     return(
         <div>
@@ -40,10 +49,10 @@ const FormComponent = (props)=>{
                 </div>
                 <div className="form-control">
                     <label>จำนวนเงิน</label>
-                    <input type="number" placeholder="ระบุจำนวนเงิน" onChange={inputAmout} value={amount} />
+                    <input type="number" placeholder="ระบุจำนวนเงิน" onChange={inputAmount} value={amount} />
                 </div>
                 <div>
-                    <button type="submit" className="btn">เพิ่มข้อมูล</button>
+                    <button type="submit" className="btn" disabled={!formValid} >เพิ่มข้อมูล</button>
                 </div>
             </form>
         </div>
